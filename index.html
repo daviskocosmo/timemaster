@@ -10,7 +10,7 @@
             text-align: center;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
+            background-color: #ffe5b4; /* Couleur de fond plus chaude */
         }
         .container {
             max-width: 600px;
@@ -25,18 +25,36 @@
             padding: 20px;
             font-size: 24px;
             color: #fff;
-            background-color: #3498db;
+            background-color: #ff6347; /* Couleur bouton plus chaude */
             border: none;
             border-radius: 10px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
         #tapButton:hover {
-            background-color: #2980b9;
+            background-color: #e55335;
         }
-        #score {
+        #score, #totalScore {
             font-size: 32px;
             margin-top: 20px;
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+        .infoButton {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #ffa07a; /* Couleur bouton plus chaude */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .infoButton:hover {
+            background-color: #ff8c69;
         }
     </style>
 </head>
@@ -45,14 +63,73 @@
         <h1>Tap to Earn</h1>
         <button id="tapButton">Tap!</button>
         <div id="score">Score: 0</div>
+        <div id="totalScore">Total Score: 0</div>
+        <div class="button-group">
+            <button class="infoButton" id="tasksButton">Tâches</button>
+            <button class="infoButton" id="questsButton">Quêtes</button>
+            <button class="infoButton" id="teamButton">Équipe</button>
+        </div>
+        <div id="info"></div>
     </div>
     <script>
         let score = 0;
+        let totalScore = 0;
 
         document.getElementById('tapButton').addEventListener('click', () => {
             score++;
             document.getElementById('score').textContent = 'Score: ' + score;
+            sendScore(score);
         });
+
+        function sendScore(score) {
+            const user_id = 123456;  // Remplacez par l'ID de l'utilisateur réel
+            fetch('http://127.0.0.1:5000/score', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user_id, score })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Score envoyé:', data);
+                totalScore = data.total_rewards;
+                document.getElementById('totalScore').textContent = 'Total Score: ' + totalScore;
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+            });
+        }
+
+        document.getElementById('tasksButton').addEventListener('click', () => {
+            fetchInfo('/tasks');
+        });
+
+        document.getElementById('questsButton').addEventListener('click', () => {
+            fetchInfo('/quests');
+        });
+
+        document.getElementById('teamButton').addEventListener('click', () => {
+            fetchInfo('/my_team');
+        });
+
+        function fetchInfo(command) {
+            const user_id = 123456;  // Remplacez par l'ID de l'utilisateur réel
+            fetch(`http://127.0.0.1:5000/${command}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user_id })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('info').textContent = data.info;
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+            });
+        }
     </script>
 </body>
 </html>
