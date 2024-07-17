@@ -120,34 +120,17 @@
         }
 
         document.getElementById('tasksButton').addEventListener('click', () => {
-            fetchInfo('/tasks');
+            window.location.href = 'http://127.0.0.1:5000/tasks_page';
         });
 
         document.getElementById('questsButton').addEventListener('click', () => {
-            fetchInfo('/quests');
+            window.location.href = 'http://127.0.0.1:5000/quests_page';
         });
 
         document.getElementById('teamButton').addEventListener('click', () => {
-            fetchInfo('/my_team');
-        });
-
-        function fetchInfo(endpoint) {
             const user_id = 123456;  // Remplacez par l'ID de l'utilisateur réel
-            fetch(`http://127.0.0.1:5000${endpoint}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ user_id })
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('info').textContent = data.info;
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-            });
-        }
+            window.location.href = `http://127.0.0.1:5000/team_page?user_id=${user_id}`;
+        });
     </script>
 </body>
 </html>
