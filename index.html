@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tap to Earn</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #tapButton {
+            display: inline-block;
+            padding: 20px;
+            font-size: 24px;
+            color: #fff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #tapButton:hover {
+            background-color: #2980b9;
+        }
+        #score {
+            font-size: 32px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tap to Earn</h1>
+        <button id="tapButton">Tap!</button>
+        <div id="score">Score: 0</div>
+    </div>
+    <script>
+        let score = 0;
+
+        document.getElementById('tapButton').addEventListener('click', () => {
+            score++;
+            document.getElementById('score').textContent = 'Score: ' + score;
+            // Envoyer le score au bot Telegram ici, si nécessaire
+        });
+    </script>
+</body>
+</html>
