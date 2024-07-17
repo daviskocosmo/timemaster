@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tap to Earn</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -62,17 +64,21 @@
 <body>
     <div class="container">
         <h1>Tap to Earn</h1>
-        <button id="tapButton">Tap!</button>
-        <button id="collectButton">Récolter</button>
-        <div id="score">Score: 0</div>
-        <div id="totalScore">Total Score: 0</div>
-        <div class="button-group">
-            <button class="infoButton" id="tasksButton">Tâches</button>
-            <button class="infoButton" id="questsButton">Quêtes</button>
-            <button class="infoButton" id="teamButton">Équipe</button>
+        <button id="tapButton" class="btn btn-danger btn-lg">Tap!</button>
+        <button id="collectButton" class="btn btn-success btn-lg">Récolter</button>
+        <div id="score" class="mt-3">Score: 0</div>
+        <div id="totalScore" class="mt-3">Total Score: 0</div>
+        <div class="button-group mt-4">
+            <button class="infoButton btn btn-info" id="tasksButton">Tâches</button>
+            <button class="infoButton btn btn-info" id="questsButton">Quêtes</button>
+            <button class="infoButton btn btn-info" id="teamButton">Équipe</button>
         </div>
-        <div id="info"></div>
+        <div id="info" class="mt-4"></div>
     </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         let score = 0;
         let totalScore = 0;
