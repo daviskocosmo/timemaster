@@ -20,7 +20,7 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        #tapButton {
+        #tapButton, #collectButton {
             display: inline-block;
             padding: 20px;
             font-size: 24px;
@@ -30,8 +30,9 @@
             border-radius: 10px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin: 10px;
         }
-        #tapButton:hover {
+        #tapButton:hover, #collectButton:hover {
             background-color: #e55335;
         }
         #score, #totalScore {
@@ -62,6 +63,7 @@
     <div class="container">
         <h1>Tap to Earn</h1>
         <button id="tapButton">Tap!</button>
+        <button id="collectButton">Récolter</button>
         <div id="score">Score: 0</div>
         <div id="totalScore">Total Score: 0</div>
         <div class="button-group">
@@ -78,7 +80,12 @@
         document.getElementById('tapButton').addEventListener('click', () => {
             score++;
             document.getElementById('score').textContent = 'Score: ' + score;
+        });
+
+        document.getElementById('collectButton').addEventListener('click', () => {
             sendScore(score);
+            score = 0;
+            document.getElementById('score').textContent = 'Score: ' + score;
         });
 
         function sendScore(score) {
@@ -115,7 +122,7 @@
 
         function fetchInfo(command) {
             const user_id = 123456;  // Remplacez par l'ID de l'utilisateur réel
-            fetch(`http://127.0.0.1:5000/${command}`, {
+            fetch(`http://127.0.0.1:5000${command}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
