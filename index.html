@@ -59,6 +59,11 @@
         .infoButton:hover {
             background-color: #ff8c69;
         }
+        #info {
+            margin-top: 20px;
+            font-size: 20px;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
@@ -126,9 +131,9 @@
             fetchInfo('/my_team');
         });
 
-        function fetchInfo(command) {
+        function fetchInfo(endpoint) {
             const user_id = 123456;  // Remplacez par l'ID de l'utilisateur réel
-            fetch(`http://127.0.0.1:5000${command}`, {
+            fetch(`http://127.0.0.1:5000${endpoint}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
